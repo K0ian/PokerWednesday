@@ -3,7 +3,6 @@ import random
 class Card:
     RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
     SUITS = ["♤", "♡", "♢", "♧"]
-
     def __init__(self, suit, rank):
         if rank not in self.RANKS:
             raise ValueError("invalid rank buddy")
@@ -11,6 +10,12 @@ class Card:
             raise ValueError("invalid suit")
         self._suit = suit
         self._rank = rank
+
+    def __eq__(self, other):
+        return self.rank == other.rank
+
+    def __gt__(self, other):
+        return self.RANKS.index(self.rank) > self.RANKS.index(other.rank)
 
     def __str__(self):
         return f"{self._rank}{self._suit}"
